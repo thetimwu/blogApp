@@ -12,9 +12,18 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    //return view('welcome');
+    return redirect('/blog');
 });
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+//Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/blog', 'BlogController@index')->middleware('auth');
+
+Route::get('/searchByTitle', 'SearchController@searchByTitle')->middleware('auth');
+
+Route::get('/sortByTitle', 'SearchController@sortPostsByTitle')->middleware('auth');
+
+Route::get('/filterPosts', 'SearchController@filterPosts')->middleware('auth');
